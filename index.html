@@ -50,13 +50,13 @@
 
       <!-- Common items grid.
            Icons are inline line-SVGs (currentColor) so they match the
-           gray scheme and need no external image files. The JavaScript
-           step will later load these tiles from data.json instead. -->
+           gray scheme and need no external image files. Width/height are
+           set on each SVG so they render even if the CSS lags behind. -->
       <section class="grid" aria-label="Common items">
         <button class="tile" data-name="Paper coffee cup" data-stream="compost"
           data-reason="Seattle composts paper hot cups. The plastic lid goes in garbage.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 4h12l-.7 3H6.7L6 4Z"/><path d="M5.4 7h13.2"/>
               <path d="M6.8 7h10.4l-1 12.2a2 2 0 0 1-2 1.8H9.8a2 2 0 0 1-2-1.8L6.8 7Z"/>
             </svg>
@@ -67,7 +67,7 @@
         <button class="tile" data-name="Pizza box" data-stream="compost"
           data-reason="Greasy cardboard composts &mdash; no need to tear off the clean parts.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 7.5C8 4.5 16 4.5 20 7.5L12 21 4 7.5Z"/>
               <circle cx="10" cy="10.5" r="1" fill="currentColor" stroke="none"/>
               <circle cx="14" cy="11.5" r="1" fill="currentColor" stroke="none"/>
@@ -80,7 +80,7 @@
         <button class="tile" data-name="Soda or energy can" data-stream="recycle"
           data-reason="Empty and quick-rinse. Aluminum recycles endlessly.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <rect x="8" y="4" width="8" height="16" rx="1.8"/>
               <path d="M8 7.4h8"/><path d="M8 16.6h8"/><path d="M11.4 5.2l1.2 1"/>
             </svg>
@@ -91,7 +91,7 @@
         <button class="tile" data-name="Plastic water bottle" data-stream="recycle"
           data-reason="Empty it first. The cap can stay on.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10.3 3h3.4v2h-3.4z"/>
               <path d="M10 5c0 1.4-1 1.8-1 3.4V18a3 3 0 0 0 6 0V8.4c0-1.6-1-2-1-3.4"/>
               <path d="M9 12.5h6"/>
@@ -103,7 +103,7 @@
         <button class="tile" data-name="Notebook paper" data-stream="recycle"
           data-reason="Clean, dry paper only &mdash; no food stains or grease.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/>
               <path d="M14 3v4h4"/><path d="M9 12h6"/><path d="M9 15h6"/><path d="M9 18h4"/>
             </svg>
@@ -114,7 +114,7 @@
         <button class="tile" data-name="Chip bag" data-stream="garbage"
           data-reason="Metallized film isn't recyclable in Seattle.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M8 6l1-2h6l1 2"/>
               <path d="M8 6h8v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6Z"/>
               <path d="M8 11h8"/>
@@ -126,7 +126,7 @@
         <button class="tile" data-name="Food scraps" data-stream="compost"
           data-reason="All food scraps compost here, including bones.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 8c-1.2-1.6-3.4-2-5-.8-1.8 1.4-1.6 4.8-.3 8 1 2.4 2 3.8 3.3 3.8.9 0 1.1-.5 2-.5s1.1.5 2 .5c1.3 0 2.3-1.4 3.3-3.8 1.3-3.2 1.5-6.6-.3-8-1.6-1.2-3.8-.8-5 .8Z"/>
               <path d="M12 8V4.5"/><path d="M12 6c1-1.6 2.8-1.6 3.6-1 0 1.6-1.8 2.6-3.6 1.8"/>
             </svg>
@@ -137,7 +137,7 @@
         <button class="tile" data-name="Plastic fork" data-stream="garbage"
           data-reason="Plastic utensils jam the sorting machines.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 3v4"/><path d="M12 3v4"/><path d="M15 3v4"/>
               <path d="M9 7c0 2 1.3 3 3 3s3-1 3-3"/><path d="M12 10v11"/>
             </svg>
@@ -148,7 +148,7 @@
         <button class="tile" data-name="Glass bottle" data-stream="recycle"
           data-reason="Empty and rinsed. Keep it loose, not bagged.">
           <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M11 2.5h2v3h-2z"/>
               <path d="M11 5.5v3.5c0 1-2 2.2-2 4.2V19a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5.8c0-2-2-3.2-2-4.2V5.5"/>
             </svg>
