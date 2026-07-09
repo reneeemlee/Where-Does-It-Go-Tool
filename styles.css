@@ -1,6 +1,6 @@
 /* ============================================================
    Where does it go?  —  UW dorm waste sorting
-   Palette is grounded in the three bins so color = meaning:
+   Palette grounded in the three bins so color = meaning:
    recycle = periwinkle, compost = sage, garbage = warm taupe.
    ============================================================ */
 
@@ -10,8 +10,9 @@
   --card: #FFFFFF;
   --ink: #3D3A42;          /* soft charcoal, not pure black */
   --ink-soft: #7A7580;     /* muted secondary text */
+  --icon: #5E5A63;         /* line-icon gray */
   --line: #ECE6E1;         /* hairline borders */
-  --accent: #9B84AC;       /* dusty lilac — focus + selection */
+  --accent: #9B84AC;       /* dusty lilac — focus + links */
 
   /* Recycle */
   --recycle-bg: #DCE8F5;
@@ -28,45 +29,72 @@
   --garbage-ink: #625647;
   --garbage-dot: #B3A691;
 
+  /* Spacing scale — one set of steps used everywhere */
+  --s1: 8px;
+  --s2: 12px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 32px;
+  --s6: 44px;
+
   --radius: 16px;
   --radius-sm: 12px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { scroll-behavior: smooth; }
+
 body {
   font-family: 'Quicksand', system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
-  line-height: 1.5;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   display: flex;
   justify-content: center;
   min-height: 100vh;
 }
 
-/* Phone-width column that also looks fine on a desktop preview */
+/* Phone-width column — roomier, consistent outer margins */
 .phone {
   width: 100%;
-  max-width: 430px;
-  padding: 18px 18px 32px;
+  max-width: 440px;
+  padding: var(--s4) var(--s5) var(--s6);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--s4);            /* one consistent rhythm between all sections */
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+
+/* ---------- Top bar ---------- */
+.topbar { display: flex; justify-content: flex-end; }
+.toplink {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding: var(--s1) 0;
+}
+.toplink:hover { text-decoration: underline; }
 
 /* ---------- Context bar ---------- */
 .context {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--s2);
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 10px 14px;
+  padding: var(--s3);
 }
 .context-icon { font-size: 18px; color: var(--accent); }
-.context-text { display: flex; flex-direction: column; line-height: 1.25; }
+.context-text { display: flex; flex-direction: column; line-height: 1.3; }
 .context-text strong { font-weight: 600; font-size: 14px; }
 .context-sub { font-size: 12px; color: var(--ink-soft); }
 .context-count {
@@ -81,10 +109,10 @@ body {
 .title {
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 32px;
   letter-spacing: -0.01em;
   text-align: center;
-  padding: 4px 0;
+  padding: var(--s1) 0;
 }
 
 /* ---------- Answer area (signature element) ---------- */
@@ -92,7 +120,7 @@ body {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 30px 22px;
+  padding: var(--s6) var(--s4);
   text-align: center;
   transition: background 0.35s ease, border-color 0.35s ease;
 }
@@ -104,14 +132,13 @@ body {
   transition: color 0.35s ease, font-size 0.2s ease;
 }
 .answer-reason {
-  margin-top: 8px;
+  margin-top: var(--s1);
   font-size: 14px;
   color: var(--ink-soft);
   transition: color 0.35s ease;
 }
 
-/* Flooded states — JS adds one of these classes to .answer.
-   The card becomes the bin's color and names the stream big. */
+/* Flooded states — JS adds one of these classes to .answer. */
 .answer.recycle { background: var(--recycle-bg); border-color: var(--recycle-bg); }
 .answer.compost { background: var(--compost-bg); border-color: var(--compost-bg); }
 .answer.garbage { background: var(--garbage-bg); border-color: var(--garbage-bg); }
@@ -132,7 +159,7 @@ body {
 .legend {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: var(--s4);
   list-style: none;
   font-size: 13px;
   color: var(--ink-soft);
@@ -147,15 +174,15 @@ body {
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: var(--s2);
 }
 .tile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  min-height: 88px;
-  padding: 14px 6px;
+  gap: var(--s1);
+  min-height: 96px;
+  padding: var(--s3) var(--s1);
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
@@ -164,20 +191,20 @@ body {
   color: var(--ink);
   transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
-.tile-icon { font-size: 28px; line-height: 1; }
+.tile-icon { color: var(--icon); line-height: 0; }
+.tile-icon svg { width: 30px; height: 30px; display: block; }
 .tile-label { font-size: 12.5px; font-weight: 500; text-align: center; }
 
 .tile:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(61, 58, 66, 0.08); }
 .tile:active { transform: translateY(0); }
 
-/* JS adds .is-selected to the tapped tile */
 .tile.is-selected {
   border-color: var(--accent);
   box-shadow: 0 0 0 2px var(--accent);
 }
 
 /* ---------- Search ---------- */
-.search { display: flex; gap: 8px; }
+.search { display: flex; gap: var(--s1); }
 .search-input {
   flex: 1;
   font-family: inherit;
@@ -186,7 +213,7 @@ body {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 12px 14px;
+  padding: var(--s2) var(--s3);
 }
 .search-input::placeholder { color: var(--ink-soft); }
 .search-btn {
@@ -197,19 +224,79 @@ body {
   background: var(--accent);
   border: none;
   border-radius: var(--radius-sm);
-  padding: 0 18px;
+  padding: 0 var(--s4);
   cursor: pointer;
   transition: opacity 0.12s ease;
 }
 .search-btn:hover { opacity: 0.9; }
 
-/* ---------- Footer ---------- */
-.foot {
+/* ---------- Helper note ---------- */
+.note {
   font-size: 12.5px;
   color: var(--ink-soft);
   text-align: center;
-  line-height: 1.5;
-  padding: 0 10px;
+  line-height: 1.55;
+  padding: 0 var(--s2);
+}
+
+/* ---------- Learn more ---------- */
+.learn {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--s4);
+  text-align: center;
+}
+.learn-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 19px;
+  margin-bottom: var(--s1);
+}
+.learn-text {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-bottom: var(--s3);
+}
+.learn-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.learn-link:hover { text-decoration: underline; }
+
+/* ---------- Contact ---------- */
+.contact {
+  text-align: center;
+  padding-top: var(--s2);
+  border-top: 1px solid var(--line);
+}
+.contact-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 19px;
+  margin-bottom: var(--s3);
+}
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--s4);
+  list-style: none;
+  margin-bottom: var(--s3);
+}
+.contact-links a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.contact-links a:hover { text-decoration: underline; }
+.credit {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
 }
 
 /* ---------- Accessibility ---------- */
@@ -229,6 +316,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   * { transition: none !important; }
   .tile:hover { transform: none; }
 }
