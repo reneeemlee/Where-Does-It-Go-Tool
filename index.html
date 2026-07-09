@@ -20,22 +20,12 @@
       <a href="#contact" class="toplink">Contact <span aria-hidden="true">&#8595;</span></a>
     </nav>
 
-    <!-- Context bar: which bin this QR code opened -->
-    <header class="context">
-      <span class="context-icon" aria-hidden="true">&#9721;</span>
-      <span class="context-text">
-        <strong id="bin-name">McMahon Hall &middot; Bin 3</strong>
-        <span class="context-sub">UW sorting rules</span>
-      </span>
-      <span class="context-count"><span id="sorted-count">1,248</span> sorted today</span>
-    </header>
-
     <main>
       <h1 class="title">Where does it go?</h1>
 
-      <!-- Answer area: the signature element.
-           Default state is calm; JS will add a stream class
-           (recycle / compost / garbage) to flood it with the bin's color. -->
+      <!-- Answer area: updates when a tile is tapped.
+           script.js adds a stream class (recycle / compost / garbage)
+           to flood it with the correct bin's color. -->
       <section class="answer" id="answer" aria-live="polite">
         <p class="answer-stream" id="answer-stream">Tap what you're holding</p>
         <p class="answer-reason" id="answer-reason">The most common dorm items, pre-sorted. No searching.</p>
@@ -49,9 +39,9 @@
       </ul>
 
       <!-- Common items grid.
-           Icons are inline line-SVGs (currentColor) so they match the
-           gray scheme and need no external image files. Width/height are
-           set on each SVG so they render even if the CSS lags behind. -->
+           Each tile carries the data script.js reads on tap:
+           the stream and the one-line reason. Icons are inline
+           line-SVGs (currentColor) so they match the gray scheme. -->
       <section class="grid" aria-label="Common items">
         <button class="tile" data-name="Paper coffee cup" data-stream="compost"
           data-reason="Seattle composts paper hot cups. The plastic lid goes in garbage.">
@@ -189,5 +179,7 @@
     </main>
 
   </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
