@@ -1,0 +1,234 @@
+/* ============================================================
+   Where does it go?  —  UW dorm waste sorting
+   Palette is grounded in the three bins so color = meaning:
+   recycle = periwinkle, compost = sage, garbage = warm taupe.
+   ============================================================ */
+
+:root {
+  /* Surfaces + text */
+  --bg: #FBF8F6;
+  --card: #FFFFFF;
+  --ink: #3D3A42;          /* soft charcoal, not pure black */
+  --ink-soft: #7A7580;     /* muted secondary text */
+  --line: #ECE6E1;         /* hairline borders */
+  --accent: #9B84AC;       /* dusty lilac — focus + selection */
+
+  /* Recycle */
+  --recycle-bg: #DCE8F5;
+  --recycle-ink: #2A4E75;
+  --recycle-dot: #6E9BC9;
+
+  /* Compost */
+  --compost-bg: #DDEBD4;
+  --compost-ink: #3C6636;
+  --compost-dot: #7FA96F;
+
+  /* Garbage */
+  --garbage-bg: #E8E1D8;
+  --garbage-ink: #625647;
+  --garbage-dot: #B3A691;
+
+  --radius: 16px;
+  --radius-sm: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Phone-width column that also looks fine on a desktop preview */
+.phone {
+  width: 100%;
+  max-width: 430px;
+  padding: 18px 18px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- Context bar ---------- */
+.context {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+.context-icon { font-size: 18px; color: var(--accent); }
+.context-text { display: flex; flex-direction: column; line-height: 1.25; }
+.context-text strong { font-weight: 600; font-size: 14px; }
+.context-sub { font-size: 12px; color: var(--ink-soft); }
+.context-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-align: right;
+  max-width: 88px;
+}
+
+/* ---------- Title ---------- */
+.title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  padding: 4px 0;
+}
+
+/* ---------- Answer area (signature element) ---------- */
+.answer {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 22px;
+  text-align: center;
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+.answer-stream {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--ink-soft);
+  transition: color 0.35s ease, font-size 0.2s ease;
+}
+.answer-reason {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  transition: color 0.35s ease;
+}
+
+/* Flooded states — JS adds one of these classes to .answer.
+   The card becomes the bin's color and names the stream big. */
+.answer.recycle { background: var(--recycle-bg); border-color: var(--recycle-bg); }
+.answer.compost { background: var(--compost-bg); border-color: var(--compost-bg); }
+.answer.garbage { background: var(--garbage-bg); border-color: var(--garbage-bg); }
+
+.answer.recycle .answer-stream,
+.answer.compost .answer-stream,
+.answer.garbage .answer-stream { font-size: 40px; }
+
+.answer.recycle .answer-stream { color: var(--recycle-ink); }
+.answer.compost .answer-stream { color: var(--compost-ink); }
+.answer.garbage .answer-stream { color: var(--garbage-ink); }
+
+.answer.recycle .answer-reason { color: var(--recycle-ink); }
+.answer.compost .answer-reason { color: var(--compost-ink); }
+.answer.garbage .answer-reason { color: var(--garbage-ink); }
+
+/* ---------- Legend ---------- */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  list-style: none;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.legend li { display: flex; align-items: center; gap: 6px; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot-recycle { background: var(--recycle-dot); }
+.dot-compost { background: var(--compost-dot); }
+.dot-garbage { background: var(--garbage-dot); }
+
+/* ---------- Item grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 88px;
+  padding: 14px 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+.tile-icon { font-size: 28px; line-height: 1; }
+.tile-label { font-size: 12.5px; font-weight: 500; text-align: center; }
+
+.tile:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(61, 58, 66, 0.08); }
+.tile:active { transform: translateY(0); }
+
+/* JS adds .is-selected to the tapped tile */
+.tile.is-selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* ---------- Search ---------- */
+.search { display: flex; gap: 8px; }
+.search-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+.search-input::placeholder { color: var(--ink-soft); }
+.search-btn {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0 18px;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+}
+.search-btn:hover { opacity: 0.9; }
+
+/* ---------- Footer ---------- */
+.foot {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  text-align: center;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+/* ---------- Accessibility ---------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .tile:hover { transform: none; }
+}

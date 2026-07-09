@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where does it go? · UW sorting</title>
+
+  <!-- Fonts: Fraunces (soft serif display) + Quicksand (rounded sans UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone">
+
+    <!-- Context bar: which bin this QR code opened -->
+    <header class="context">
+      <span class="context-icon" aria-hidden="true">◹</span>
+      <span class="context-text">
+        <strong id="bin-name">McMahon Hall · Bin 3</strong>
+        <span class="context-sub">UW sorting rules</span>
+      </span>
+      <span class="context-count"><span id="sorted-count">1,248</span> sorted today</span>
+    </header>
+
+    <main>
+      <h1 class="title">Where does it go?</h1>
+
+      <!-- Answer area: the signature element.
+           Default state is calm; JS will add a stream class
+           (recycle / compost / garbage) to flood it with the bin's color. -->
+      <section class="answer" id="answer" aria-live="polite">
+        <p class="answer-stream" id="answer-stream">Tap what you're holding</p>
+        <p class="answer-reason" id="answer-reason">The most common dorm items, pre-sorted. No searching.</p>
+      </section>
+
+      <!-- Legend: what the three colors mean -->
+      <ul class="legend" aria-label="Bin colors">
+        <li><span class="dot dot-recycle" aria-hidden="true"></span>Recycle</li>
+        <li><span class="dot dot-compost" aria-hidden="true"></span>Compost</li>
+        <li><span class="dot dot-garbage" aria-hidden="true"></span>Garbage</li>
+      </ul>
+
+      <!-- Common items grid.
+           For now these are hardcoded; the JavaScript step will
+           load them from data.json instead. Each tile carries the
+           data JS needs: which stream, and the one-line reason. -->
+      <section class="grid" aria-label="Common items">
+        <button class="tile" data-name="Paper coffee cup" data-stream="compost"
+          data-reason="Seattle composts paper hot cups. The plastic lid goes in garbage.">
+          <span class="tile-icon" aria-hidden="true">☕</span>
+          <span class="tile-label">Coffee cup</span>
+        </button>
+
+        <button class="tile" data-name="Pizza box" data-stream="compost"
+          data-reason="Greasy cardboard composts — no need to tear off the clean parts.">
+          <span class="tile-icon" aria-hidden="true">🍕</span>
+          <span class="tile-label">Pizza box</span>
+        </button>
+
+        <button class="tile" data-name="Soda or energy can" data-stream="recycle"
+          data-reason="Empty and quick-rinse. Aluminum recycles endlessly.">
+          <span class="tile-icon" aria-hidden="true">🥫</span>
+          <span class="tile-label">Can</span>
+        </button>
+
+        <button class="tile" data-name="Plastic water bottle" data-stream="recycle"
+          data-reason="Empty it first. The cap can stay on.">
+          <span class="tile-icon" aria-hidden="true">💧</span>
+          <span class="tile-label">Water bottle</span>
+        </button>
+
+        <button class="tile" data-name="Notebook paper" data-stream="recycle"
+          data-reason="Clean, dry paper only — no food stains or grease.">
+          <span class="tile-icon" aria-hidden="true">📄</span>
+          <span class="tile-label">Paper</span>
+        </button>
+
+        <button class="tile" data-name="Chip bag" data-stream="garbage"
+          data-reason="Metallized film isn't recyclable in Seattle.">
+          <span class="tile-icon" aria-hidden="true">🍪</span>
+          <span class="tile-label">Chip bag</span>
+        </button>
+
+        <button class="tile" data-name="Food scraps" data-stream="compost"
+          data-reason="All food scraps compost here, including bones.">
+          <span class="tile-icon" aria-hidden="true">🍎</span>
+          <span class="tile-label">Food scraps</span>
+        </button>
+
+        <button class="tile" data-name="Plastic fork" data-stream="garbage"
+          data-reason="Plastic utensils jam the sorting machines.">
+          <span class="tile-icon" aria-hidden="true">🍴</span>
+          <span class="tile-label">Plastic fork</span>
+        </button>
+
+        <button class="tile" data-name="Glass bottle" data-stream="recycle"
+          data-reason="Empty and rinsed. Keep it loose, not bagged.">
+          <span class="tile-icon" aria-hidden="true">🍾</span>
+          <span class="tile-label">Glass bottle</span>
+        </button>
+      </section>
+
+      <!-- Search fallback for items not in the grid -->
+      <section class="search">
+        <label for="search-input" class="visually-hidden">Search for an item</label>
+        <input type="text" id="search-input" class="search-input"
+          placeholder="Search for something else" autocomplete="off" />
+        <button class="search-btn" id="search-btn" aria-label="Search">Find it</button>
+      </section>
+    </main>
+
+    <footer class="foot">
+      When in doubt, it goes in garbage — a wrong guess in recycling spoils the whole bin.
+    </footer>
+
+  </div>
+</body>
+</html>
